@@ -31,7 +31,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-#login-message, #signup-message {
+#message {
     color: red;
     margin-top: 10px;
 }
