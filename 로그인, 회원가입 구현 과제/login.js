@@ -59,13 +59,20 @@ router.post("/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password); // ✅ 비밀번호 검증
     if (match) {
         const token = jwt.sign({ email: user.email }, SECRET_KEY, { expiresIn: "1h" }); // ✅ JWT 생성
-        res.status(200).json({ message: "✅ 로그인 성공!", token });
+
+        // ✅ 로그인 성공 후 피라미드 프로그램 페이지로 이동
+        res.status(200).json({ 
+            message: "✅ 로그인 성공!", 
+            token, 
+            redirect: "/pyramid"
+        });
     } else {
         res.status(401).json({ message: "❌ 비밀번호가 틀렸습니다." });
     }
 });
 
 module.exports = router;
+
 
 async function register() {
     const email = document.getElementById("signup-email").value.toLowerCase();
